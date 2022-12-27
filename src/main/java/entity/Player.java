@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -31,14 +30,14 @@ public class Player extends Entity {
     public void getPlayerImage() {
         try {
 
-            playerUp1 = ImageIO.read(getClass().getResourceAsStream("/boy_up_1.png"));
-            playerUp2 = ImageIO.read(getClass().getResourceAsStream("/boy_up_2.png"));
-            playerDown1 = ImageIO.read(getClass().getResourceAsStream("/boy_down_1.png"));
-            playerDown2 = ImageIO.read(getClass().getResourceAsStream("/boy_down_2.png"));
-            playerLeft1 = ImageIO.read(getClass().getResourceAsStream("/boy_left_1.png"));
-            playerLeft2 = ImageIO.read(getClass().getResourceAsStream("/boy_left_2.png"));
-            playerRight1 = ImageIO.read(getClass().getResourceAsStream("/boy_right_1.png"));
-            playerRight2 = ImageIO.read(getClass().getResourceAsStream("/boy_right_2.png"));
+            playerUp1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_up_1.png"));
+            playerUp2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_up_2.png"));
+            playerDown1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_down_1.png"));
+            playerDown2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_down_2.png"));
+            playerLeft1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_left_1.png"));
+            playerLeft2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_left_2.png"));
+            playerRight1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_right_1.png"));
+            playerRight2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_right_2.png"));
 
 
         } catch (IOException e) {
