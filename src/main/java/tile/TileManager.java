@@ -30,13 +30,16 @@ public class TileManager {
     public void getTitleImage() {
         try {
 
+            //Outer wall
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/ground.png"));
             tile[0].collision = true;
 
+            //ground
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/wall.png"));
 
+            //room barriers
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/CoolDesignTile.png"));
             tile[2].collision = true;
@@ -44,17 +47,17 @@ public class TileManager {
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/AnotherColor.png"));
 
+            //Used as doors
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/AnotherColor1.png"));
 
+            //test item
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk.png"));
 
+            //test item
             tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk2.png"));
-
-            tile[7] = new Tile();
-            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk3.png"));
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk3.png"));
 
 
         } catch (IOException e) {

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+import object.ObjectSetter;
+import object.SuperObject;
 import tile.CollisionChecker;
 import tile.TileManager;
 
@@ -14,7 +16,6 @@ public class GamePanel extends JPanel implements Runnable {
     //Screen Settings
     final int originalTileSize = 16; // 16x16 tile standard size for retro 2d games.
     final int scale = 3; //Scare the image to make it bigger for high resolution screens.
-
     public final int tileSize = originalTileSize * scale; //48x48 tile size
     public final int maxScreenColumn = 16; //Width of the screen
     public final int maxScreenRow = 12; //Height of the screen
@@ -26,17 +27,17 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldRow = 34;
     public final int worldWidth = tileSize * maxWorldColumn;
     public final int worldHeight = tileSize * maxWorldRow;
-
-    //FPS
     int FPS = 60;
-
     public TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
+    public ObjectSetter objectSetter = new ObjectSetter(this);
     public Player player = new Player(this, keyHandler);
+    public SuperObject[] gameObject = new SuperObject[10];
 
 
+    //GamePanel Ctor
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.orange);
@@ -45,6 +46,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    public void setupGame() {
+        objectSetter.setObject();
+    }
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -100,7 +104,17 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2D = (Graphics2D) graphics;
 
+        //Tile
         tileManager.draw(graphics2D);
+
+        //Game Objects
+        for (int i = 0; i < gameObject.length; i++) {
+            if(gameObject[i] != null) {
+                gameObject[i].draw(graphics2D, this);
+            }
+        }
+
+        //Player
         player.draw(graphics2D);
 
         graphics2D.dispose();
