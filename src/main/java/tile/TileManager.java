@@ -14,22 +14,23 @@ public class TileManager {
     Tile[] tile;
     int[][] mapTileNumber;
 
+    //TileManager Ctor
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
         //Array is for every type of tile.
         tile = new Tile[10];
-        mapTileNumber = new int[gamePanel.maxScreenColumn][gamePanel.maxScreenRow];
+        mapTileNumber = new int[gamePanel.maxWorldColumn][gamePanel.maxWorldRow];
 
         getTitleImage();
-        loadMap("/maps/FloorMap1.txt");
+        loadMap("/maps/WorldMap.txt");
     }
 
+    //Obtain all the tiles from resources.
     public void getTitleImage() {
         try {
 
             tile[0] = new Tile();
-
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/ground.png"));
 
             tile[1] = new Tile();
@@ -43,7 +44,6 @@ public class TileManager {
 
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/AnotherColor1.png"));
-
 
 
         } catch (IOException e) {
@@ -61,17 +61,17 @@ public class TileManager {
             int column = 0;
             int row = 0;
 
-            while (column < gamePanel.maxScreenColumn && row < gamePanel.maxScreenRow) {
+            while (column < gamePanel.maxWorldColumn && row < gamePanel.maxWorldRow) {
 
                 String line = reader.readLine();
 
-                while (column < gamePanel.maxScreenColumn) {
+                while (column < gamePanel.maxWorldColumn) {
                     String[] numbers = line.split(" ");
                     int number = Integer.parseInt(numbers[column]);
                     mapTileNumber[column][row] = number;
                     column++;
                 }
-                if (column == gamePanel.maxScreenColumn) {
+                if (column == gamePanel.maxWorldColumn) {
                     column = 0;
                     row++;
                 }
@@ -88,24 +88,35 @@ public class TileManager {
 
     public void draw(Graphics2D graphics2D) {
 
-        int column = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldColumn = 0;
+        int worldRow = 0;
 
-        while (column < gamePanel.maxScreenColumn && row < gamePanel.maxScreenRow) {
 
-            int tileNumber = mapTileNumber[column][row];
+        while (worldColumn < gamePanel.maxWorldColumn && worldRow < gamePanel.maxWorldRow) {
 
-            graphics2D.drawImage(tile[tileNumber].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-            column++;
-            x += gamePanel.tileSize;
+            int tileNumber = mapTileNumber[worldColumn][worldRow];
 
-            if(column == gamePanel.maxScreenColumn) {
-                column = 0;
-                x = 0;
-                row++;
-                y += gamePanel.tileSize;
+            int worldX = worldColumn * gamePanel.tileSize;
+            int worldY = worldRow * gamePanel.tileSize;
+            int playerScreenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
+            int playerScreenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+
+            //Render only the area that is in view of the camera.
+            if(worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
+                    worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
+                    worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
+                    worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
+
+                graphics2D.drawImage(tile[tileNumber].image, playerScreenX, playerScreenY, gamePanel.tileSize, gamePanel.tileSize, null);
+
+            }
+
+            worldColumn++;
+
+
+            if(worldColumn == gamePanel.maxWorldColumn) {
+                worldColumn = 0;
+                worldRow++;
             }
         }
     }

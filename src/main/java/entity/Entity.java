@@ -2,10 +2,12 @@ package entity;
 
 import java.awt.image.BufferedImage;
 
+//Super class that sets up all the environmental variables for speeds, players, NPCs, etc.
 public class Entity {
 
-    public int x;
-    public int y;
+
+    public int worldX;
+    public int worldY;
     public int speed;
 
     public BufferedImage playerUp1;
