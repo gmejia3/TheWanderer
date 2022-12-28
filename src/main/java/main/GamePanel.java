@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+import tile.CollisionChecker;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -29,9 +30,10 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
     int FPS = 60;
 
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyHandler);
 
 

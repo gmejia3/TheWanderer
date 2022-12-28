@@ -11,8 +11,8 @@ import main.GamePanel;
 public class TileManager {
 
     GamePanel gamePanel;
-    Tile[] tile;
-    int[][] mapTileNumber;
+    public Tile[] tile;
+    public int[][] mapTileNumber;
 
     //TileManager Ctor
     public TileManager(GamePanel gamePanel) {
@@ -32,18 +32,29 @@ public class TileManager {
 
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/ground.png"));
+            tile[0].collision = true;
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/wall.png"));
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/CoolDesignTile.png"));
+            tile[2].collision = true;
 
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/AnotherColor.png"));
 
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/AnotherColor1.png"));
+
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk.png"));
+
+            tile[6] = new Tile();
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk2.png"));
+
+            tile[7] = new Tile();
+            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk3.png"));
 
 
         } catch (IOException e) {
@@ -108,11 +119,9 @@ public class TileManager {
                     worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
 
                 graphics2D.drawImage(tile[tileNumber].image, playerScreenX, playerScreenY, gamePanel.tileSize, gamePanel.tileSize, null);
-
             }
 
             worldColumn++;
-
 
             if(worldColumn == gamePanel.maxWorldColumn) {
                 worldColumn = 0;

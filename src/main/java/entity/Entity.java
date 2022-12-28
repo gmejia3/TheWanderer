@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 //Super class that sets up all the environmental variables for speeds, players, NPCs, etc.
@@ -23,5 +24,7 @@ public class Entity {
 
     public int spriteCounter = 0;
     public int spriteNumber = 1;
+    public Rectangle playerBody;
+    public boolean collisionOn = false;
 
 }

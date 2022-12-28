@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -21,8 +22,10 @@ public class Player extends Entity {
         setGamePanel(gamePanel);
         setKeyHandler(keyHandler);
 
-        screenX = gamePanel.screenWidth/2 - (gamePanel.tileSize/2);
-        screenY = gamePanel.screenHeight/2 - (gamePanel.tileSize/2);
+        screenX = gamePanel.screenWidth / 2 - (gamePanel.tileSize / 2);
+        screenY = gamePanel.screenHeight / 2 - (gamePanel.tileSize / 2);
+
+        playerBody = new Rectangle(8, 16, 32, 32);
 
         setDefaultValues();
         getPlayerImage();
@@ -30,8 +33,8 @@ public class Player extends Entity {
 
     //Default location placement, "direction facing", and player speed to walk.
     public void setDefaultValues() {
-        worldX = gamePanel.tileSize * 23;
-        worldY = gamePanel.tileSize * 21;
+        worldX = gamePanel.tileSize * 20;
+        worldY = gamePanel.tileSize * 20;
         speed = 4;
         direction = "down";
     }
@@ -60,35 +63,53 @@ public class Player extends Entity {
     public void update() {
 
         //The sprite will not switch between pictures to show a walking motion unless a key is pressed.
-        if(keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed) {
-            spriteCounter++;
-        }
-
-        //Each key that is pressed has a corresponding action and image that is created with the following if chain statement.
-        if (keyHandler.upPressed) {
-            direction = "up";
-            worldY -= speed;
-        } else if (keyHandler.downPressed) {
-            direction = "down";
-            worldY += speed;
-        } else if (keyHandler.leftPressed) {
-            direction = "left";
-            worldX -= speed;
-        } else if (keyHandler.rightPressed) {
-            direction = "right";
-            worldX += speed;
-        }
+        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed
+                || keyHandler.rightPressed) {
 
 
-
-        //Player image changes every 10 seconds.
-        if(spriteCounter > 12) {
-            if(spriteNumber == 1) {
-                spriteNumber = 2;
-            } else if ( spriteNumber == 2) {
-                spriteNumber = 1;
+            //Each key that is pressed has a corresponding action and image that is created with the following if chain statement.
+            if (keyHandler.upPressed) {
+                direction = "up";
+            } else if (keyHandler.downPressed) {
+                direction = "down";
+            } else if (keyHandler.leftPressed) {
+                direction = "left";
+            } else if (keyHandler.rightPressed) {
+                direction = "right";
             }
-            spriteCounter = 0;
+
+            //Check for tile collision
+            collisionOn = false;
+            gamePanel.collisionChecker.checkTile(this);
+
+            //if collision is false, player can move
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
+            }
+
+            //Player image changes every 10 seconds.
+            if (spriteCounter > 12) {
+                if (spriteNumber == 1) {
+                    spriteNumber = 2;
+                } else if (spriteNumber == 2) {
+                    spriteNumber = 1;
+                }
+                spriteCounter = 0;
+            }
+            spriteCounter++;
         }
     }
 
