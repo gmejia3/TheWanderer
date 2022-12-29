@@ -16,7 +16,8 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    int hashKey = 0;
+    int hasCoffee = 0;
+    int hasDesk = 0;
 
     //Player CTOR
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
@@ -123,7 +124,32 @@ public class Player extends Entity {
     public void pickUpObject(int index) {
 
         if (index != 999) {
-            gamePanel.gameObject[index] = null;
+            String objectName = gamePanel.gameObject[index].name;
+            switch (objectName) {
+                case "Coffee":
+                    speed += 2;
+                    gamePanel.playSoundEffect(4);
+                    hasCoffee++;
+                    gamePanel.gameObject[index] = null;
+                    System.out.println("You picked up a key!");
+                    break;
+                case "Desk":
+                    if(hasCoffee > 0) {
+                        gamePanel.playSoundEffect(1);
+                        gamePanel.gameObject[index] = null;
+                        hasDesk++;
+                        hasCoffee--;
+                        System.out.println("Used a coffee to pick up desk.");
+                    }
+                    break;
+                case "Code":
+                    gamePanel.playSoundEffect(2);
+                    gamePanel.gameObject[index] = null;
+                    break;
+
+
+            }
+            System.out.println("You have " + hasCoffee + " Coffee and " + hasDesk + " Desk.");
         }
     }
 

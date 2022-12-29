@@ -57,7 +57,7 @@ public class TileManager {
 
             //test item
             tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/backgroundTiles/desk3.png"));
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/objects/desk3.png"));
 
 
         } catch (IOException e) {

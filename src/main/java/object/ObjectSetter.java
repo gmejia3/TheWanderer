@@ -33,5 +33,13 @@ public class ObjectSetter {
         gamePanel.gameObject[3] = new Coffee();
         gamePanel.gameObject[3].worldX = 29 * gamePanel.tileSize;
         gamePanel.gameObject[3].worldY = 22 * gamePanel.tileSize;
+
+        gamePanel.gameObject[4] = new Code();
+        gamePanel.gameObject[4].worldX = 29 * gamePanel.tileSize;
+        gamePanel.gameObject[4].worldY = 7 * gamePanel.tileSize;
+
+        gamePanel.gameObject[5] = new Code();
+        gamePanel.gameObject[5].worldX = 31 * gamePanel.tileSize;
+        gamePanel.gameObject[5].worldY = 7 * gamePanel.tileSize;
     }
 }
