@@ -18,6 +18,8 @@ public class Sound {
         soundURL[3] = getClass().getResource("/music/Minecraft.wav");
         soundURL[4] = getClass().getResource("/music/Pokemon.wav");
         soundURL[5] = getClass().getResource("/music/win_pokemon.wav");
+        soundURL[6] = getClass().getResource("/music/coin.wav");
+        soundURL[7] = getClass().getResource("/music/powerup.wav");
 
     }
 

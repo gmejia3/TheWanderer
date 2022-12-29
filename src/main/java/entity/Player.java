@@ -128,14 +128,15 @@ public class Player extends Entity {
             switch (objectName) {
                 case "Coffee":
                     speed += 2;
-                    gamePanel.playSoundEffect(4);
+                    gamePanel.playSoundEffect(6);
                     hasCoffee++;
                     gamePanel.gameObject[index] = null;
                     System.out.println("You picked up a key!");
                     break;
                 case "Desk":
                     if(hasCoffee > 0) {
-                        gamePanel.playSoundEffect(1);
+                        gamePanel.stopMusic();
+                        gamePanel.playSoundEffect(4);
                         gamePanel.gameObject[index] = null;
                         hasDesk++;
                         hasCoffee--;
@@ -143,7 +144,7 @@ public class Player extends Entity {
                     }
                     break;
                 case "Code":
-                    gamePanel.playSoundEffect(2);
+                    gamePanel.playSoundEffect(7);
                     gamePanel.gameObject[index] = null;
                     break;
 
