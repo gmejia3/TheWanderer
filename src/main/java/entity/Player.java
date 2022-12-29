@@ -16,6 +16,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    int hashKey = 0;
 
     //Player CTOR
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
@@ -25,7 +26,9 @@ public class Player extends Entity {
         screenX = gamePanel.screenWidth / 2 - (gamePanel.tileSize / 2);
         screenY = gamePanel.screenHeight / 2 - (gamePanel.tileSize / 2);
 
-        playerBody = new Rectangle(8, 16, 32, 32);
+        solidAreaPlayer = new Rectangle(8, 16, 32, 32);
+        solidAreaDefaultX = solidAreaPlayer.x; //This value is taken from the instantiated rectangle.
+        solidAreaDefaultY = solidAreaPlayer.y; //Same source of value.
 
         setDefaultValues();
         getPlayerImage();
@@ -82,6 +85,10 @@ public class Player extends Entity {
             collisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
 
+            //check object collision
+            int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
+            pickUpObject(objectIndex);
+
             //if collision is false, player can move
             if (!collisionOn) {
                 switch (direction) {
@@ -112,6 +119,14 @@ public class Player extends Entity {
             spriteCounter++;
         }
     }
+
+    public void pickUpObject(int index) {
+
+        if (index != 999) {
+            gamePanel.gameObject[index] = null;
+        }
+    }
+
 
     //Sets up the image for the sprite to walk depending on direction.
     public void draw(Graphics2D graphics2D) {

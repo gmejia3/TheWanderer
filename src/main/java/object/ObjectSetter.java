@@ -13,7 +13,7 @@ public class ObjectSetter {
     public void setObject() {
 
         //Instantiate desk and give it a default location.
-        gamePanel.gameObject[0] = new ObjectComputerDesk();
+        gamePanel.gameObject[0] = new ComputerDesk();
         gamePanel.gameObject[0].worldX = 30 * gamePanel.tileSize;
         gamePanel.gameObject[0].worldY = 7 * gamePanel.tileSize;
 

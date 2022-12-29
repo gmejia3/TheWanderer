@@ -3,9 +3,9 @@ package object;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class ObjectComputerDesk extends SuperObject{
+public class ComputerDesk extends SuperObject{
 
-    public ObjectComputerDesk() {
+    public ComputerDesk() {
 
         name = "Desk";
         try {
@@ -15,6 +15,8 @@ public class ObjectComputerDesk extends SuperObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        collision = true;
 
     }
 }
