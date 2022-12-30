@@ -30,11 +30,12 @@ public class GamePanel extends JPanel implements Runnable {
     //System
     public TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
-    Sound music = new Sound();
+    Sound backgroundMusic = new Sound();
+    Sound pokeMusic = new Sound();
     Sound soundEffect = new Sound();
-
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public ObjectSetter objectSetter = new ObjectSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread;
 
 
@@ -126,22 +127,37 @@ public class GamePanel extends JPanel implements Runnable {
         //Player
         player.draw(graphics2D);
 
+        //UI
+        ui.draw(graphics2D);
         graphics2D.dispose();
     }
 
     public void playMusic(int i) {
-        music.setFile(i);
-        music.play();
-        music.loop();
+        backgroundMusic.setFile(i);
+        backgroundMusic.play();
+        backgroundMusic.loop();
     }
 
     public void stopMusic() {
-        music.stop();
+        backgroundMusic.stop();
+    }
+
+    public void playPokeMusic(int i) {
+        pokeMusic.setFile(4);
+        pokeMusic.play();
+    }
+
+    public void stopPokeMusic() {
+        pokeMusic.stop();
     }
 
     public void playSoundEffect(int i) {
         soundEffect.setFile(i);
         soundEffect.play();
+    }
+
+    public void stopSoundEffect() {
+        soundEffect.stop();
     }
 
 

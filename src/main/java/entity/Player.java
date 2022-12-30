@@ -16,7 +16,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    int hasCoffee = 0;
+    public int hasCoffee = 0;
     int hasDesk = 0;
 
     //Player CTOR
@@ -49,12 +49,18 @@ public class Player extends Entity {
 
             playerUp1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_up_1.png"));
             playerUp2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_up_2.png"));
-            playerDown1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_down_1.png"));
-            playerDown2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_down_2.png"));
-            playerLeft1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_left_1.png"));
-            playerLeft2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_left_2.png"));
-            playerRight1 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_right_1.png"));
-            playerRight2 = ImageIO.read(getClass().getResourceAsStream("/playerImages/boy_right_2.png"));
+            playerDown1 = ImageIO.read(
+                    getClass().getResourceAsStream("/playerImages/boy_down_1.png"));
+            playerDown2 = ImageIO.read(
+                    getClass().getResourceAsStream("/playerImages/boy_down_2.png"));
+            playerLeft1 = ImageIO.read(
+                    getClass().getResourceAsStream("/playerImages/boy_left_1.png"));
+            playerLeft2 = ImageIO.read(
+                    getClass().getResourceAsStream("/playerImages/boy_left_2.png"));
+            playerRight1 = ImageIO.read(
+                    getClass().getResourceAsStream("/playerImages/boy_right_1.png"));
+            playerRight2 = ImageIO.read(
+                    getClass().getResourceAsStream("/playerImages/boy_right_2.png"));
 
 
         } catch (IOException e) {
@@ -69,7 +75,6 @@ public class Player extends Entity {
         //The sprite will not switch between pictures to show a walking motion unless a key is pressed.
         if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed
                 || keyHandler.rightPressed) {
-
 
             //Each key that is pressed has a corresponding action and image that is created with the following if chain statement.
             if (keyHandler.upPressed) {
@@ -131,26 +136,39 @@ public class Player extends Entity {
                     gamePanel.playSoundEffect(6);
                     hasCoffee++;
                     gamePanel.gameObject[index] = null;
-                    System.out.println("You picked up a key!");
+                    gamePanel.ui.showMessage("You picked up a coffee!");
+
                     break;
                 case "Desk":
-                    if(hasCoffee > 0) {
+                    if (hasCoffee > 0) {
                         gamePanel.stopMusic();
-                        gamePanel.playSoundEffect(4);
+                        gamePanel.playPokeMusic(4);
                         gamePanel.gameObject[index] = null;
                         hasDesk++;
                         hasCoffee--;
-                        System.out.println("Used a coffee to pick up desk.");
+                        gamePanel.ui.showMessage("You picked up the desk!");
+                    } else {
+                        gamePanel.ui.showMessage("You need some Coffee!");
                     }
                     break;
                 case "Code":
                     gamePanel.playSoundEffect(7);
                     gamePanel.gameObject[index] = null;
+                    gamePanel.ui.showMessage("You found some code!");
                     break;
 
+                case "SuperDesk":
+                    if (hasCoffee >= 2 && hasDesk > 0) {
 
+                        gamePanel.stopPokeMusic();
+                        gamePanel.ui.gameFinished = true;
+                        gamePanel.playSoundEffect(0);
+                    } else {
+                        gamePanel.ui.showMessage("You need a desk and more Coffee! ");
+                    }
+                    break;
             }
-            System.out.println("You have " + hasCoffee + " Coffee and " + hasDesk + " Desk.");
+
         }
     }
 

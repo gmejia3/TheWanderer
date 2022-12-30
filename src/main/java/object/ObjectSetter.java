@@ -41,5 +41,9 @@ public class ObjectSetter {
         gamePanel.gameObject[5] = new Code();
         gamePanel.gameObject[5].worldX = 31 * gamePanel.tileSize;
         gamePanel.gameObject[5].worldY = 7 * gamePanel.tileSize;
+
+        gamePanel.gameObject[6] = new SuperDesk();
+        gamePanel.gameObject[6].worldX = 52 * gamePanel.tileSize;
+        gamePanel.gameObject[6].worldY = 10 * gamePanel.tileSize;
     }
 }
