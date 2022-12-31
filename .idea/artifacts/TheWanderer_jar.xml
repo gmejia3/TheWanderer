@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TheWanderer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TheWanderer_jar</output-path>
+    <root id="archive" name="TheWanderer.jar">
+      <element id="module-output" name="TheWanderer" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/coin.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/ending.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/finalboss.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/game-over.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/Minecraft.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/Pokemon.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/powerup.wav" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/music/win_pokemon.wav" />
+    </root>
+  </artifact>
+</component>

@@ -132,6 +132,7 @@ public class GamePanel extends JPanel implements Runnable {
         graphics2D.dispose();
     }
 
+    //Note so that I can do a commit/push.
     public void playMusic(int i) {
         backgroundMusic.setFile(i);
         backgroundMusic.play();
